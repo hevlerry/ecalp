@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import LoginForm, RegisterForm
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.messages import error
 
 
 def home(request):
@@ -46,10 +47,12 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('newsfeed')
+            else:
+                messages.error(request, 'Incorrect username or password')
     else:
         form = LoginForm()
-    return render(request, 'main/login.html')
+    return render(request, 'main/login.html', {'form': form})
 
 
 def logout_view(request):

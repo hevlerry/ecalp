@@ -27,6 +27,13 @@
         <h2>Log in</h2>
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
             <label for="username">Username:</label>
             <input type="text" id="username" name="username"><br><br>
             <label for="password">Password:</label>

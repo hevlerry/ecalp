@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Newsfeed</h1>
+  <div class="products">
+    {% for product in products %}
+      <div class="product">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.description }}</p>
+        <p>Price: {{ product.price }}</p>
+        <img src="{{ product.image.url }}" alt="Product Image">
+        <p>Posted by: {{ product.user.username }}</p>
+      </div>
+    {% endfor %}
+  </div>
+  <button><a href="{% url 'post_product' %}">Post a Product Listing</a></button>
+{% endblock %}
